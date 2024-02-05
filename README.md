@@ -21,8 +21,6 @@ To run this project locally, follow these steps:
 
     bash
 
-git clone https://github.com/yourusername/hospital-management-system.git
-
 Install the project dependencies:
 
 pip install -r requirements.txt
