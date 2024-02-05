@@ -1,0 +1,32 @@
+<!-- landing_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <h1>{{ title }}</h1>
+
+    <form method="post" action="{% url 'add_hospital' %}">
+        {% csrf_token %}
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br>
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" id="phone_number" name="phone_number"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="website">Website:</label><br>
+        <input type="text" id="website" name="website"><br>
+        <label for="capacity">Capacity:</label><br>
+        <input type="number" id="capacity" name="capacity"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
