@@ -1,4 +1,3 @@
-<!-- add_hospital.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,15 +5,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Hospital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Add Hospital</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1>Add Hospital</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_name">Name:</label><br>
+                {{ form.name }}
+            </div>
+            <div>
+                <label for="id_address">Address:</label><br>
+                {{ form.address }}
+            </div>
+            <div>
+                <label for="id_phone_number">Phone Number:</label><br>
+                {{ form.phone_number }}
+            </div>
+            <div>
+                <label for="id_email">Email:</label><br>
+                {{ form.email }}
+            </div>
+            <div>
+                <label for="id_website">Website:</label><br>
+                {{ form.website }}
+            </div>
+            <div>
+                <label for="id_capacity">Capacity:</label><br>
+                {{ form.capacity }}
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 
 </html>
