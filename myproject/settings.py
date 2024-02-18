@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hospitals',
     'graphene_django',
     'users',
+    'doctors',
 ]
 
 MIDDLEWARE = [

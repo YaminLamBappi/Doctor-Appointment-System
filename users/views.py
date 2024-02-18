@@ -13,12 +13,17 @@ def login_view(request):
         print(user)
         if user is not None:
             login(request, user)
-            return redirect('/landing/')
+            return redirect('home')
         #    context = {"error": "Something Wrong!"}
         else:
             login(request, user)
             return redirect('/admin/')
     return render(request, "accounts/login.html", context)
+
+
+def home(request):
+    return render(request, 'accounts/home.html')
+
 
 def logout_view(request):
     if request.method == "POST":
