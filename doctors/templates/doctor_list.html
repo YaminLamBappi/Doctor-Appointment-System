@@ -96,6 +96,22 @@
 
 <body>
     <div class="container">
+        <div class="row">
+            <div class="col-md-6" id="right-col">
+                <h2>Search & Filter</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="specialty">Specialty:</label>
+                        <select class="form-control" id="specialty">
+                            <option value="">All Specialties</option>
+                            <option value="Pediatric">Pediatric</option>
+                            <!-- Add other specialty options here -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
         <div class="hero-section">
             <h1>Find the Right Doctor for You</h1>
             <p>Explore doctors by specialty, location, or keyword.</p>
@@ -118,26 +134,7 @@
             </div>
             {% endfor %}
         </div>
-        <div class="row">
-            <div class="col-md-6" id="right-col">
-                <h2>Search & Filter</h2>
-                <form>
-                    <div class="form-group">
-                        <label for="specialty">Specialty:</label>
-                        <select class="form-control" id="specialty">
-                            <option value="">All Specialties</option>
-                            <option value="Pediatric">Pediatric</option>
-                            <!-- Add other specialty options here -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="location">Location:</label>
-                        <input type="text" class="form-control" id="location" placeholder="Enter City or Zip Code">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-            </div>
-        </div>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
