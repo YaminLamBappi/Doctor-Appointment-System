@@ -5,30 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Your Doctor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        /* styles.css */
         body {
             font-family: sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
         }
 
         .container {
             max-width: 960px;
             margin: 0 auto;
+            padding: 30px;
         }
 
-        h1 {
+        .hero-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-section h1 {
             font-size: 2em;
-            margin-bottom: 1em;
-        }
-
-        p {
-            color: #666;
-            margin-bottom: 1.5em;
+            margin-bottom: 10px;
         }
 
         .list-group-item {
             border: none;
             padding: 1em;
-            background-color: #f5f5f5;
             border-radius: 5px;
         }
 
@@ -42,10 +46,15 @@
 
         .media img {
             border: 1px solid #ddd;
+            border-radius: 50%;
+        }
+
+        .media-body {
+            margin-left: 10px;
         }
 
         .media-body h5 {
-            margin-bottom: 0.5em;
+            margin-bottom: 5px;
         }
 
         .media-body p {
@@ -60,38 +69,92 @@
         .media-body a:hover {
             color: #177ddc;
         }
+
+        #right-col form {
+            margin-top: 20px;
+        }
+
+        /* Bootstrap styles */
+        .doctor-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            width: 48%;
+            /* Adjust width for two columns with spacing */
+            margin-bottom: 15px;
+            /* Optional: Add margin between items */
+        }
+
+        .card-body {
+            padding: 15px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1>Find the Right Doctor for You</h1>
-        <p>Explore doctors by specialty, location, or keyword.</p>
-
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="list-group list-group-flush">
-                    {% for doctor in doctors %}
-                    <li class="list-group-item list-group-item-action">
-                        <div class="media">
-                            <img src="{{ doctor.profile_picture.url }}" alt="{{ doctor.name }} Profile Picture"
-                                class="mr-3 rounded-circle" width="80">
-                            <div class="media-body">
-                                <h5 class="mt-0">{{ doctor.name }}</h5>
-                                <p><strong>Specialty:</strong> {{ doctor.specialty }}</p>
-                                <p><a href="{% url 'doctor_profile' doctor.id %}">View Profile</a></p>
-                            </div>
+    <div class="container">
+        <div class="hero-section">
+            <h1>Find the Right Doctor for You</h1>
+            <p>Explore doctors by specialty, location, or keyword.</p>
+        </div>
+        <div class="doctor-list" id="doctorList">
+            {% for doctor in doctors %}
+            <div class="card" data-specialty="{{ doctor.specialty }}">
+                <div class="card-body">
+                    <div class="media">
+                        <img src="{{ doctor.image_url }}" alt="{{ doctor.name }} Profile Picture"
+                            class="mr-3 rounded-circle" width="80">
+                        <div class="media-body">
+                            <h5 class="card-title">{{ doctor.name }}</h5>
+                            <p class="card-text"><strong>Education</strong> {{ doctor.education }}</p>
+                            <p class="card-text"><strong>Specialty:</strong> {{ doctor.specialty }}</p>
+                            <p class="card-text"><a href="{% url 'doctor_profile' doctor.id %}">View Profile</a></p>
                         </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-6" id="right-col">
+                <h2>Search & Filter</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="specialty">Specialty:</label>
+                        <select class="form-control" id="specialty">
+                            <option value="">All Specialties</option>
+                            <option value="Pediatric">Pediatric</option>
+                            <!-- Add other specialty options here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input type="text" class="form-control" id="location" placeholder="Enter City or Zip Code">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#specialty').change(function () {
+                var selectedSpecialty = $(this).val();
+                if (selectedSpecialty === '') {
+                    $('.card').show();
+                } else {
+                    $('.card').hide();
+                    $('.card[data-specialty="' + selectedSpecialty + '"]').show();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
